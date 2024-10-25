@@ -1,6 +1,7 @@
 # Real-Time Data Processing System for Weather Monitoring
 
 This project is a real-time weather monitoring and alerting system, analyzing data from various cities. It visualizes temperature trends, summarizes daily data, and provides visualizations for weather data.
+Check out the Deployed application here https://real-time-data-processing-system-for-weather-monitoring-navy.vercel.app/
 
 ## Features
 - **Real-Time Data Fetching**: Retrieves weather data using OpenWeather API.
