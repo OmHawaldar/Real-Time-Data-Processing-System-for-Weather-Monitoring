@@ -1,5 +1,5 @@
 requests==2.31.0
-pandas==2.2.1
+pandas==1.5.3
 plotly==5.19.0
 python-dotenv==1.0.1
 schedule==1.2.1
