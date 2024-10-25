@@ -45,17 +45,17 @@ export default function WeatherDashboard() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-900 text-gray-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <header className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">Weather Monitoring System</h1>
+          <h1 className="text-3xl font-bold text-gray-100">Weather Monitoring System</h1>
           {lastUpdate && (
-            <p className="text-sm text-gray-500">
+            <p className="text-sm text-gray-400">
               Last updated: {format(lastUpdate, 'PPpp')}
             </p>
           )}
         </header>
-
+        
         {/* Current Weather Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
           {weatherData
@@ -63,23 +63,23 @@ export default function WeatherDashboard() {
               index === self.findIndex(d => d.city === data.city)
             )
             .map(data => (
-              <div key={data.city} className="bg-white rounded-lg shadow-sm p-6">
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">{data.city}</h3>
+              <div key={data.city} className="bg-gray-800 rounded-lg shadow-sm p-6">
+                <h3 className="text-lg font-semibold text-gray-100 mb-4">{data.city}</h3>
                 <div className="space-y-3">
                   <div className="flex items-center">
                     <Thermometer className="w-5 h-5 text-red-500 mr-2" />
                     <span>{data.temp.toFixed(1)}°C</span>
                   </div>
                   <div className="flex items-center">
-                    <CloudRain className="w-5 h-5 text-blue-500 mr-2" />
+                    <CloudRain className="w-5 h-5 text-blue-400 mr-2" />
                     <span>{data.main}</span>
                   </div>
                   <div className="flex items-center">
-                    <Wind className="w-5 h-5 text-gray-500 mr-2" />
+                    <Wind className="w-5 h-5 text-gray-300 mr-2" />
                     <span>{data.wind_speed} m/s</span>
                   </div>
                   <div className="flex items-center">
-                    <Droplets className="w-5 h-5 text-blue-400 mr-2" />
+                    <Droplets className="w-5 h-5 text-blue-300 mr-2" />
                     <span>{data.humidity}%</span>
                   </div>
                 </div>
@@ -88,22 +88,24 @@ export default function WeatherDashboard() {
         </div>
 
         {/* Temperature Chart */}
-        <div className="bg-white rounded-lg shadow-sm p-6 mb-8">
-          <h2 className="text-xl font-semibold text-gray-900 mb-4">Temperature Trends</h2>
+        <div className="bg-gray-800 rounded-lg shadow-sm p-6 mb-8">
+          <h2 className="text-xl font-semibold text-gray-100 mb-4">Temperature Trends</h2>
           <div className="h-[400px]">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={weatherData.slice(-48)} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
-                <CartesianGrid strokeDasharray="3 3" />
+                <CartesianGrid strokeDasharray="3 3" stroke="#333" />
                 <XAxis 
                   dataKey="dt" 
                   tickFormatter={(dt) => format(new Date(dt * 1000), 'HH:mm')}
+                  stroke="#aaa"
                 />
-                <YAxis />
+                <YAxis stroke="#aaa" />
                 <Tooltip 
+                  contentStyle={{ backgroundColor: '#333', color: '#fff' }}
                   labelFormatter={(dt) => format(new Date(dt * 1000), 'PPpp')}
                   formatter={(value) => [`${Number(value).toFixed(1)}°C`]}
                 />
-                <Legend />
+                <Legend wrapperStyle={{ color: "#aaa" }} />
                 {Array.from(new Set(weatherData.map(d => d.city))).map((city, index) => (
                   <Line
                     key={city}
@@ -122,14 +124,14 @@ export default function WeatherDashboard() {
 
         {/* Alerts */}
         {alerts.length > 0 && (
-          <div className="bg-white rounded-lg shadow-sm p-6">
-            <h2 className="text-xl font-semibold text-gray-900 mb-4">Recent Alerts</h2>
+          <div className="bg-gray-800 rounded-lg shadow-sm p-6">
+            <h2 className="text-xl font-semibold text-gray-100 mb-4">Recent Alerts</h2>
             <div className="space-y-4">
               {alerts.slice(0, 5).map((alert, index) => (
                 <div
                   key={index}
                   className={`p-4 rounded-lg ${
-                    alert.type === 'danger' ? 'bg-red-50' : 'bg-yellow-50'
+                    alert.type === 'danger' ? 'bg-red-800 text-red-200' : 'bg-yellow-800 text-yellow-200'
                   }`}
                 >
                   <div className="flex items-center justify-between">
@@ -137,7 +139,7 @@ export default function WeatherDashboard() {
                       <h3 className="font-medium">{alert.city}</h3>
                       <p className="text-sm">{alert.message}</p>
                     </div>
-                    <span className="text-sm text-gray-500">
+                    <span className="text-sm text-gray-400">
                       {format(new Date(alert.timestamp * 1000), 'PPp')}
                     </span>
                   </div>
