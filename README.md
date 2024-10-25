@@ -10,20 +10,21 @@ Check out the Deployed application here https://real-time-data-processing-system
 
 ## Installation
 1. Clone the repository:
-   ```bash
-   git clone https://github.com/OmHawaldar/Real-Time-Data-Processing-System-for-Weather-Monitoring.git
+```bash
+ git clone https://github.com/OmHawaldar/Real-Time-Data-Processing-System-for-Weather-Monitoring.git
+```
 2.Install Dependencies:
-  ```bash
-  npm run dev
+```bash
+npm install
 ```
 3.Replace your OpenWeather API key in .env file
 ```
 OPENWEATHER_API_KEY= "replace here"
 ```
 4. Run the Project
-   ```
-   npm run dev
-   ```
+```
+npm run dev
+```
 ## Project Structure
 
 - **src/components**: React components for weather cards, chart, preferences form, and visualizations.
